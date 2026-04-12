@@ -5,12 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Send, MapPin, Mail } from "lucide-react";
 import { toast } from "sonner";
 
+const EMAIL = "bhavyasreekothareddy1602@gmail.com";
+
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent! Thank you for reaching out.");
+    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
+    window.open(`mailto:${EMAIL}?subject=${subject}&body=${body}`, "_self");
+    toast.success("Opening your email client...");
     setForm({ name: "", email: "", message: "" });
   };
 
@@ -38,15 +43,15 @@ const ContactSection = () => {
         <div className="grid md:grid-cols-5 gap-8">
           {/* Info */}
           <ScrollReveal className="md:col-span-2 space-y-5">
-            <div className="glass rounded-xl p-5 glow-border">
+            <a href={`mailto:${EMAIL}`} className="block glass rounded-xl p-5 glow-border hover:border-primary/40 transition-all group">
               <div className="flex items-center gap-3 mb-2">
                 <Mail className="w-4 h-4 text-primary" />
                 <span className="text-sm text-foreground font-medium">Email</span>
               </div>
-              <a href="mailto:bhavyasreekothareddy1602@gmail.com" className="text-xs text-muted-foreground hover:text-primary transition-colors break-all">
-                bhavyasreekothareddy1602@gmail.com
-              </a>
-            </div>
+              <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors break-all">
+                {EMAIL}
+              </span>
+            </a>
             <div className="glass rounded-xl p-5 glow-border">
               <div className="flex items-center gap-3 mb-2">
                 <MapPin className="w-4 h-4 text-primary" />

@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import CursorGlow from "@/components/CursorGlow";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
@@ -10,6 +11,7 @@ import Footer from "@/components/Footer";
 
 const Index = () => (
   <div className="min-h-screen bg-background">
+    <CursorGlow />
     <Navbar />
     <HeroSection />
     <AboutSection />
