@@ -1,8 +1,10 @@
 import TypingAnimation from "@/components/TypingAnimation";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Linkedin, Github } from "lucide-react";
+import { ArrowDown, Linkedin, Github, Download } from "lucide-react";
 import { motion } from "framer-motion";
+
+const RESUME_URL = "https://drive.google.com/file/d/1lBkatn6Upyu-YDIY0QzW2N4G5HHxigEA/view?usp=sharing";
 
 const HeroSection = () => (
   <section id="hero" className="relative min-h-screen flex items-center justify-center section-padding pt-28 overflow-hidden">
@@ -22,9 +24,14 @@ const HeroSection = () => (
         <p className="text-muted-foreground max-w-lg mb-6 leading-relaxed">
           One line of code at a time — Learning, Building, and Growing every day.
         </p>
-        <div className="flex gap-3 justify-center md:justify-start">
+        <div className="flex gap-3 justify-center md:justify-start flex-wrap">
           <a href="#contact">
             <Button variant="glow">Get in Touch</Button>
+          </a>
+          <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="gap-1.5 border-border/60 hover:border-primary/50 hover:glow-border transition-all">
+              <Download className="w-4 h-4" /> Download Resume
+            </Button>
           </a>
           <a href="https://www.linkedin.com/in/kothareddy-bhavya-sree" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="icon" className="border-border/60 hover:border-primary/50 hover:glow-border transition-all">
@@ -50,6 +57,11 @@ const HeroSection = () => (
             src="https://image2url.com/r2/bucket1/images/1775972519332-627b9073-c790-4db6-91ab-6ca6e13909d2.png"
             alt="Kothareddy Bhavya Sree"
             className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              target.parentElement!.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-secondary text-4xl font-heading font-bold text-primary">BK</div>';
+            }}
           />
         </div>
       </motion.div>
