@@ -6,9 +6,10 @@ import { motion } from "framer-motion";
 
 const RESUME_URL = "https://drive.google.com/file/d/1lBkatn6Upyu-YDIY0QzW2N4G5HHxigEA/view?usp=sharing";
 
+const MotionButton = motion.create(Button);
+
 const HeroSection = () => (
   <section id="hero" className="relative min-h-screen flex items-center justify-center section-padding pt-28 overflow-hidden">
-    {/* Background glow orbs */}
     <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-[120px] animate-glow-pulse" />
     <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-accent/10 rounded-full blur-[120px] animate-glow-pulse" style={{ animationDelay: "1.5s" }} />
 
@@ -25,24 +26,38 @@ const HeroSection = () => (
           One line of code at a time — Learning, Building, and Growing every day.
         </p>
         <div className="flex gap-3 justify-center md:justify-start flex-wrap">
-          <a href="#contact">
+          <motion.a href="#contact" whileTap={{ scale: 0.93 }}>
             <Button variant="glow">Get in Touch</Button>
-          </a>
-          <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+          </motion.a>
+          <motion.a href={RESUME_URL} target="_blank" rel="noopener noreferrer" whileTap={{ scale: 0.93 }}>
             <Button variant="outline" className="gap-1.5 border-border/60 hover:border-primary/50 hover:glow-border transition-all">
               <Download className="w-4 h-4" /> Download Resume
             </Button>
-          </a>
-          <a href="https://www.linkedin.com/in/kothareddy-bhavya-sree" target="_blank" rel="noopener noreferrer">
+          </motion.a>
+          <motion.a
+            href="https://www.linkedin.com/in/kothareddy-bhavya-sree"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.15, rotate: 5 }}
+            whileTap={{ scale: 0.85, rotate: -10 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+          >
             <Button variant="outline" size="icon" className="border-border/60 hover:border-primary/50 hover:glow-border transition-all">
               <Linkedin className="w-4 h-4" />
             </Button>
-          </a>
-          <a href="https://github.com/Bhavya-Sree-K" target="_blank" rel="noopener noreferrer">
+          </motion.a>
+          <motion.a
+            href="https://github.com/Bhavya-Sree-K"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.15, rotate: -5 }}
+            whileTap={{ scale: 0.85, rotate: 10 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+          >
             <Button variant="outline" size="icon" className="border-border/60 hover:border-primary/50 hover:glow-border transition-all">
               <Github className="w-4 h-4" />
             </Button>
-          </a>
+          </motion.a>
         </div>
       </ScrollReveal>
 
@@ -50,7 +65,9 @@ const HeroSection = () => (
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative"
+        whileHover={{ scale: 1.05, rotate: 2 }}
+        whileTap={{ scale: 0.95, rotate: -3 }}
+        className="relative cursor-pointer"
       >
         <div className="w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-primary/30 glow-primary animate-float">
           <img
@@ -67,9 +84,14 @@ const HeroSection = () => (
       </motion.div>
     </div>
 
-    <a href="#about" className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+    <motion.a
+      href="#about"
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float"
+      whileHover={{ scale: 1.3 }}
+      whileTap={{ scale: 0.8, y: 5 }}
+    >
       <ArrowDown className="w-5 h-5 text-muted-foreground" />
-    </a>
+    </motion.a>
   </section>
 );
 
