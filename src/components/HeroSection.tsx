@@ -1,5 +1,6 @@
 import TypingAnimation from "@/components/TypingAnimation";
 import ScrollReveal from "@/components/ScrollReveal";
+import GlitchText from "@/components/GlitchText";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Linkedin, Github, Download } from "lucide-react";
 import { motion } from "framer-motion";
@@ -17,7 +18,8 @@ const HeroSection = () => (
       <ScrollReveal className="flex-1 text-center md:text-left">
         <p className="text-primary font-medium mb-2 tracking-wide text-sm uppercase">Hello, I'm</p>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-4">
-          KOTHAREDDY<br />BHAVYA SREE
+          <GlitchText text="KOTHAREDDY" /><br />
+          <GlitchText text="BHAVYA SREE" />
         </h1>
         <div className="text-xl sm:text-2xl mb-4 min-h-[2rem]">
           <TypingAnimation />
