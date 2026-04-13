@@ -2,54 +2,132 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionTitle from "@/components/SectionTitle";
 import TiltCard from "@/components/TiltCard";
 import { motion } from "framer-motion";
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 const skillCategories = [
   {
     title: "Frontend",
     color: "from-primary/20 to-primary/5",
     skills: [
-      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-      { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", level: 85 },
+      { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", level: 80 },
+      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", level: 75 },
+      { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", level: 70 },
     ],
   },
   {
     title: "Backend",
     color: "from-accent/20 to-accent/5",
     skills: [
-      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", level: 65 },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", level: 75 },
     ],
   },
   {
     title: "Databases",
     color: "from-primary/20 to-accent/10",
     skills: [
-      { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+      { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", level: 70 },
     ],
   },
   {
     title: "Tools",
     color: "from-accent/15 to-primary/10",
     skills: [
-      { name: "Eclipse", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eclipse/eclipse-original.svg" },
+      { name: "Eclipse", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eclipse/eclipse-original.svg", level: 65 },
     ],
   },
   {
     title: "AI Tools",
     color: "from-primary/15 to-accent/15",
     skills: [
-      { name: "ChatGPT", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
-      { name: "Gemini", icon: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" },
+      { name: "ChatGPT", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", level: 85 },
+      { name: "Gemini", icon: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg", level: 80 },
     ],
   },
 ];
 
+// Flatten all skills for radar chart
+const radarData = skillCategories.flatMap((cat) =>
+  cat.skills.map((s) => ({ skill: s.name, level: s.level, fullMark: 100 }))
+);
+
+const CustomTick = ({ payload, x, y, textAnchor }: any) => (
+  <text
+    x={x}
+    y={y}
+    textAnchor={textAnchor}
+    fill="hsl(215, 15%, 55%)"
+    fontSize={11}
+    fontFamily="Inter, sans-serif"
+  >
+    {payload.value}
+  </text>
+);
+
 const SkillsSection = () => (
   <section id="skills" className="section-padding">
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-6xl mx-auto">
       <SectionTitle title="Skills" subtitle="Technologies and tools I work with" />
+
+      {/* Radar Chart */}
+      <ScrollReveal>
+        <TiltCard>
+          <div className="glass rounded-xl p-6 md:p-8 mb-8 hover:glow-border transition-all duration-300">
+            <h3 className="font-heading font-semibold text-foreground text-lg mb-4 text-center text-gradient">
+              Skill Radar
+            </h3>
+            <div className="w-full h-[350px] sm:h-[400px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="75%" data={radarData}>
+                  <PolarGrid
+                    stroke="hsl(220, 15%, 18%)"
+                    strokeDasharray="3 3"
+                  />
+                  <PolarAngleAxis
+                    dataKey="skill"
+                    tick={<CustomTick />}
+                  />
+                  <PolarRadiusAxis
+                    angle={30}
+                    domain={[0, 100]}
+                    tick={false}
+                    axisLine={false}
+                  />
+                  <Radar
+                    name="Proficiency"
+                    dataKey="level"
+                    stroke="hsl(170, 80%, 50%)"
+                    fill="hsl(170, 80%, 50%)"
+                    fillOpacity={0.15}
+                    strokeWidth={2}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      background: "hsl(220, 20%, 8%)",
+                      border: "1px solid hsl(220, 15%, 18%)",
+                      borderRadius: "8px",
+                      color: "hsl(210, 40%, 95%)",
+                      fontSize: "13px",
+                    }}
+                    formatter={(value: number) => [`${value}%`, "Proficiency"]}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </TiltCard>
+      </ScrollReveal>
+
+      {/* Skill Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {skillCategories.map((cat, i) => (
           <ScrollReveal key={cat.title} delay={i * 0.1}>
@@ -69,6 +147,7 @@ const SkillsSection = () => (
                     >
                       <img src={s.icon} alt={s.name} className="w-4 h-4" />
                       {s.name}
+                      <span className="text-[10px] text-primary ml-1">{s.level}%</span>
                     </motion.span>
                   ))}
                 </div>

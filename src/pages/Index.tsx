@@ -11,9 +11,11 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import ParticleBackground from "@/components/ParticleBackground";
+import MatrixRain from "@/components/MatrixRain";
 
 const Index = () => (
   <div className="min-h-screen bg-background relative">
+    <MatrixRain />
     <Suspense fallback={null}>
       <ParticleBackground />
     </Suspense>
