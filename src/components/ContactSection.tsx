@@ -1,8 +1,10 @@
 import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionTitle from "@/components/SectionTitle";
+import TiltCard from "@/components/TiltCard";
 import { Button } from "@/components/ui/button";
 import { Send, MapPin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 
 const EMAIL = "bhavyasreekothareddy1602@gmail.com";
@@ -43,22 +45,30 @@ const ContactSection = () => {
         <div className="grid md:grid-cols-5 gap-8">
           {/* Info */}
           <ScrollReveal className="md:col-span-2 space-y-5">
-            <a href={`mailto:${EMAIL}`} className="block glass rounded-xl p-5 glow-border hover:border-primary/40 transition-all group">
-              <div className="flex items-center gap-3 mb-2">
-                <Mail className="w-4 h-4 text-primary" />
-                <span className="text-sm text-foreground font-medium">Email</span>
+            <TiltCard>
+              <motion.a
+                href={`mailto:${EMAIL}`}
+                whileTap={{ scale: 0.95, rotate: -1 }}
+                className="block glass rounded-xl p-5 glow-border hover:border-primary/40 transition-all group"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <Mail className="w-4 h-4 text-primary" />
+                  <span className="text-sm text-foreground font-medium">Email</span>
+                </div>
+                <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors break-all">
+                  {EMAIL}
+                </span>
+              </motion.a>
+            </TiltCard>
+            <TiltCard>
+              <div className="glass rounded-xl p-5 glow-border">
+                <div className="flex items-center gap-3 mb-2">
+                  <MapPin className="w-4 h-4 text-primary" />
+                  <span className="text-sm text-foreground font-medium">Location</span>
+                </div>
+                <p className="text-xs text-muted-foreground">Bengaluru, Karnataka, India</p>
               </div>
-              <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors break-all">
-                {EMAIL}
-              </span>
-            </a>
-            <div className="glass rounded-xl p-5 glow-border">
-              <div className="flex items-center gap-3 mb-2">
-                <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-sm text-foreground font-medium">Location</span>
-              </div>
-              <p className="text-xs text-muted-foreground">Bengaluru, Karnataka, India</p>
-            </div>
+            </TiltCard>
           </ScrollReveal>
 
           {/* Form */}
