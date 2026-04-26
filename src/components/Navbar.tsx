@@ -101,13 +101,28 @@ const Navbar = () => {
       </a>
 
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
-        <a
+        <motion.a
           href="#hero"
-          className="shrink-0 rounded-md px-2 py-1 font-heading font-bold text-foreground tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          aria-label="Home"
+          whileHover={{ scale: 1.08, rotate: -2 }}
+          whileTap={{ scale: 0.92, rotate: 4 }}
+          transition={{ type: "spring", stiffness: 400, damping: 15 }}
+          className="shrink-0 relative group rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          aria-label="Home — KB"
         >
-          <span className="text-gradient">BS</span>
-        </a>
+          <span
+            aria-hidden="true"
+            className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary/40 via-accent/40 to-primary/40 opacity-60 blur-md group-hover:opacity-100 transition-opacity animate-glow-pulse"
+          />
+          <span className="relative flex items-center justify-center h-10 w-10 rounded-lg glass border border-primary/40 glow-border overflow-hidden">
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20"
+            />
+            <span className="relative font-heading font-extrabold text-base tracking-tight text-gradient drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)]">
+              KB
+            </span>
+          </span>
+        </motion.a>
 
         {/* Desktop links */}
         <div
