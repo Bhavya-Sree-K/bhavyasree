@@ -103,14 +103,10 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
         <a
           href="#hero"
-          className="shrink-0 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          aria-label="TAP Academy home"
+          className="shrink-0 rounded-md px-2 py-1 font-heading font-bold text-foreground tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          aria-label="Home"
         >
-          <img
-            src="https://tapportfolio.lovable.app/assets/logo-CxDGoOCE.png"
-            alt="TAP Academy"
-            className="h-9"
-          />
+          <span className="text-gradient">BS</span>
         </a>
 
         {/* Desktop links */}
