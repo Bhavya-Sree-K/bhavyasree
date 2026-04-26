@@ -92,8 +92,20 @@ const Navbar = () => {
           : "glass py-2"
       )}
     >
+      {/* Skip to main content for keyboard users */}
+      <a
+        href="#about"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-2 focus:rounded-md focus:bg-primary focus:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+      >
+        Skip to main content
+      </a>
+
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
-        <a href="#hero" className="shrink-0">
+        <a
+          href="#hero"
+          className="shrink-0 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          aria-label="TAP Academy home"
+        >
           <img
             src="https://tapportfolio.lovable.app/assets/logo-CxDGoOCE.png"
             alt="TAP Academy"
@@ -102,15 +114,25 @@ const Navbar = () => {
         </a>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((l) => {
+        <div
+          ref={desktopLinksRef}
+          className="hidden md:flex items-center gap-1"
+          role="menubar"
+          aria-label="Primary"
+        >
+          {navLinks.map((l, i) => {
             const isActive = active === l.id;
             return (
               <a
                 key={l.href}
                 href={l.href}
+                data-nav-link
+                role="menuitem"
+                aria-current={isActive ? "page" : undefined}
+                onKeyDown={(e) => handleLinkKeyDown(e, i)}
                 className={cn(
                   "relative text-sm px-3 py-2 rounded-md transition-colors duration-200",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   isActive
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -122,6 +144,7 @@ const Navbar = () => {
                     layoutId="nav-active"
                     className="absolute inset-0 -z-10 rounded-md bg-primary/10 border border-primary/30"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    aria-hidden="true"
                   />
                 )}
                 {isActive && (
@@ -129,40 +152,57 @@ const Navbar = () => {
                     layoutId="nav-underline"
                     className="absolute left-2 right-2 -bottom-0.5 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    aria-hidden="true"
                   />
                 )}
               </a>
             );
           })}
-          <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="ml-3">
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-3 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
             <Button variant="glow" size="sm" className="gap-1.5">
-              <Download className="w-4 h-4" /> Resume
+              <Download className="w-4 h-4" aria-hidden="true" /> Resume
             </Button>
           </a>
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-foreground"
+          ref={toggleBtnRef}
+          className="md:hidden text-foreground p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:bg-secondary/50 transition-colors"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-nav-menu"
         >
-          {open ? <X /> : <Menu />}
+          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden glass-strong border-t border-border/50 px-4 pb-4 animate-fade-in">
+        <div
+          id="mobile-nav-menu"
+          role="menu"
+          aria-label="Primary"
+          className="md:hidden glass-strong border-t border-border/50 px-4 pb-4 animate-fade-in"
+        >
           {navLinks.map((l) => {
             const isActive = active === l.id;
             return (
               <a
                 key={l.href}
                 href={l.href}
+                role="menuitem"
+                aria-current={isActive ? "page" : undefined}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "block py-2 text-sm transition-colors border-l-2 pl-3 my-1",
+                  "block py-2 text-sm transition-colors border-l-2 pl-3 my-1 rounded-r-md",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                   isActive
                     ? "text-foreground border-primary bg-primary/5"
                     : "text-muted-foreground border-transparent hover:text-foreground"
@@ -172,9 +212,14 @@ const Navbar = () => {
               </a>
             );
           })}
-          <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="mt-2 block">
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 block rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
             <Button variant="glow" size="sm" className="w-full gap-1.5">
-              <Download className="w-4 h-4" /> Resume
+              <Download className="w-4 h-4" aria-hidden="true" /> Resume
             </Button>
           </a>
         </div>
