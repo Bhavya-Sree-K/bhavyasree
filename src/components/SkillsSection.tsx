@@ -14,21 +14,18 @@ import {
 
 const skillCategories = [
   {
-    title: "Frontend",
+    title: "Programming Languages",
     color: "from-primary/20 to-primary/5",
     skills: [
-      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", level: 85 },
-      { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", level: 80 },
-      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", level: 75 },
-      { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", level: 70 },
+      { name: "Core Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", level: 75 },
+      { name: "Programming", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg", level: 70 },
     ],
   },
   {
-    title: "Backend",
+    title: "Frontend",
     color: "from-accent/20 to-accent/5",
     skills: [
-      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", level: 65 },
-      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", level: 75 },
+      { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", level: 85 },
     ],
   },
   {
@@ -36,21 +33,6 @@ const skillCategories = [
     color: "from-primary/20 to-accent/10",
     skills: [
       { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", level: 70 },
-    ],
-  },
-  {
-    title: "Tools",
-    color: "from-accent/15 to-primary/10",
-    skills: [
-      { name: "Eclipse", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eclipse/eclipse-original.svg", level: 65 },
-    ],
-  },
-  {
-    title: "AI Tools",
-    color: "from-primary/15 to-accent/15",
-    skills: [
-      { name: "ChatGPT", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", level: 85 },
-      { name: "Gemini", icon: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg", level: 80 },
     ],
   },
 ];
