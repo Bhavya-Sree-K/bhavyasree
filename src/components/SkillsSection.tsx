@@ -35,6 +35,21 @@ const skillCategories = [
       { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", level: 70 },
     ],
   },
+  {
+    title: "Tools",
+    color: "from-accent/15 to-primary/10",
+    skills: [
+      { name: "Eclipse", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eclipse/eclipse-original.svg", level: 65 },
+    ],
+  },
+  {
+    title: "AI Tools",
+    color: "from-primary/15 to-accent/15",
+    skills: [
+      { name: "ChatGPT", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", level: 85 },
+      { name: "Gemini", icon: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg", level: 80 },
+    ],
+  },
 ];
 
 // Flatten all skills for radar chart
