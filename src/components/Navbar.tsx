@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
@@ -19,6 +19,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>("hero");
+  const desktopLinksRef = useRef<HTMLDivElement>(null);
+  const toggleBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +44,41 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu on Escape and return focus to toggle
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleBtnRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Arrow-key navigation between desktop links
+  const handleLinkKeyDown = (e: KeyboardEvent<HTMLAnchorElement>, index: number) => {
+    const links = desktopLinksRef.current?.querySelectorAll<HTMLAnchorElement>(
+      "a[data-nav-link]"
+    );
+    if (!links || links.length === 0) return;
+
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      e.preventDefault();
+      links[(index + 1) % links.length].focus();
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+      e.preventDefault();
+      links[(index - 1 + links.length) % links.length].focus();
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      links[0].focus();
+    } else if (e.key === "End") {
+      e.preventDefault();
+      links[links.length - 1].focus();
+    }
+  };
 
   return (
     <motion.nav
