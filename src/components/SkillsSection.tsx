@@ -18,7 +18,7 @@ const skillCategories = [
     color: "from-primary/20 to-primary/5",
     skills: [
       { name: "Core Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", level: 75 },
-      { name: "Programming", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg", level: 70 },
+      { name: "Programming", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", level: 70 },
     ],
   },
   {
