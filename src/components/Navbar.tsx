@@ -110,16 +110,30 @@ const Navbar = () => {
           whileTap={{ scale: 0.92, rotate: 4 }}
           transition={{ type: "spring", stiffness: 400, damping: 15 }}
           className="shrink-0 relative group rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          aria-label="Home — KB"
+          aria-label="KB — back to top"
+          tabIndex={0}
+          style={{
+            // dynamic glow reacts to scroll
+            ["--kb-glow" as any]: `${0.35 + scrollProgress * 0.65}`,
+          }}
         >
           <span
             aria-hidden="true"
-            className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary/40 via-accent/40 to-primary/40 opacity-60 blur-md group-hover:opacity-100 transition-opacity animate-glow-pulse"
+            className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary/40 via-accent/40 to-primary/40 blur-md transition-opacity animate-glow-pulse"
+            style={{ opacity: `var(--kb-glow)` }}
           />
-          <span className="relative flex items-center justify-center h-10 w-10 rounded-lg glass border border-primary/40 glow-border overflow-hidden">
+          <span
+            className="relative flex items-center justify-center h-10 w-10 rounded-lg glass border border-primary/40 glow-border overflow-hidden"
+            style={{ boxShadow: `0 0 ${10 + scrollProgress * 30}px hsl(var(--primary) / ${0.2 + scrollProgress * 0.5})` }}
+          >
             <span
               aria-hidden="true"
               className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20"
+            />
+            {/* animated highlight sweep */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/30 to-transparent animate-kb-sweep"
             />
             <span className="relative font-heading font-extrabold text-base tracking-tight text-gradient drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)]">
               KB
