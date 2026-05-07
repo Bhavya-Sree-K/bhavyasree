@@ -22,6 +22,7 @@ const Navbar = () => {
   const [active, setActive] = useState<string>("hero");
   const desktopLinksRef = useRef<HTMLDivElement>(null);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,13 +49,45 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on Escape and return focus to toggle
+  // Focus trap + Escape handling for mobile menu
   useEffect(() => {
     if (!open) return;
+
+    const getFocusable = () => {
+      const root = mobileMenuRef.current;
+      if (!root) return [] as HTMLElement[];
+      return Array.from(
+        root.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => !el.hasAttribute("aria-hidden"));
+    };
+
+    // Focus the first item when menu opens
+    const first = getFocusable()[0];
+    first?.focus();
+
     const onKey = (e: globalThis.KeyboardEvent) => {
       if (e.key === "Escape") {
+        e.preventDefault();
         setOpen(false);
         toggleBtnRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const focusables = [toggleBtnRef.current, ...getFocusable()].filter(
+        Boolean
+      ) as HTMLElement[];
+      if (focusables.length === 0) return;
+      const firstEl = focusables[0];
+      const lastEl = focusables[focusables.length - 1];
+      const activeEl = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && activeEl === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      } else if (!e.shiftKey && activeEl === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
       }
     };
     window.addEventListener("keydown", onKey);
@@ -215,6 +248,7 @@ const Navbar = () => {
       {open && (
         <div
           id="mobile-nav-menu"
+          ref={mobileMenuRef}
           role="menu"
           aria-label="Primary"
           className="md:hidden glass-strong border-t border-border/50 px-4 pb-4 animate-fade-in"
