@@ -96,6 +96,11 @@ export default {
           "0%, 100%": { borderColor: "hsl(var(--primary))" },
           "50%": { borderColor: "transparent" },
         },
+        "kb-sweep": {
+          "0%": { transform: "translateX(0%) skewX(-20deg)", opacity: "0" },
+          "30%": { opacity: "1" },
+          "100%": { transform: "translateX(400%) skewX(-20deg)", opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -105,6 +110,7 @@ export default {
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
         "typing-cursor": "typing-cursor 0.8s step-end infinite",
+        "kb-sweep": "kb-sweep 3.5s ease-in-out infinite",
       },
     },
   },
