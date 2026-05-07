@@ -18,6 +18,7 @@ const RESUME_URL = "https://drive.google.com/file/d/1lBkatn6Upyu-YDIY0QzW2N4G5HH
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [active, setActive] = useState<string>("hero");
   const desktopLinksRef = useRef<HTMLDivElement>(null);
   const toggleBtnRef = useRef<HTMLButtonElement>(null);
@@ -25,6 +26,8 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docH > 0 ? Math.min(1, Math.max(0, window.scrollY / docH)) : 0);
 
       // Active section detection
       const sections = ["hero", ...navLinks.map((l) => l.id)];
