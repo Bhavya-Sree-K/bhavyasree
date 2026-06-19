@@ -33,7 +33,7 @@ const HeroSection = () => (
           <motion.a href="#contact" whileTap={{ scale: 0.93 }}>
             <Button variant="glow">Get in Touch</Button>
           </motion.a>
-          <motion.a href={RESUME_URL} target="_blank" rel="noopener noreferrer" whileTap={{ scale: 0.93 }}>
+          <motion.a href={RESUME_URL} download="Kothareddy_Bhavyasree_Resume.pdf" target="_blank" rel="noopener noreferrer" whileTap={{ scale: 0.93 }}>
             <Button variant="outline" className="gap-1.5 border-border/60 hover:border-primary/50 hover:glow-border transition-all">
               <Download className="w-4 h-4" /> Download Resume
             </Button>
