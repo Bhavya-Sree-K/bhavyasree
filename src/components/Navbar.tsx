@@ -13,7 +13,9 @@ const navLinks = [
   { label: "Contact", href: "#contact", id: "contact" },
 ];
 
-const RESUME_URL = "https://drive.google.com/file/d/1lBkatn6Upyu-YDIY0QzW2N4G5HHxigEA/view?usp=sharing";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
+
+const RESUME_URL = resumeAsset.url;
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);

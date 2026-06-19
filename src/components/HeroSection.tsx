@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown, Linkedin, Github, Download } from "lucide-react";
 import { motion } from "framer-motion";
 
-const RESUME_URL = "https://drive.google.com/file/d/1lBkatn6Upyu-YDIY0QzW2N4G5HHxigEA/view?usp=sharing";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
+
+const RESUME_URL = resumeAsset.url;
 
 const MotionButton = motion.create(Button);
 
