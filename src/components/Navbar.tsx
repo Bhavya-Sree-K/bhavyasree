@@ -223,6 +223,7 @@ const Navbar = () => {
           })}
           <a
             href={RESUME_URL}
+            download="Kothareddy_Bhavyasree_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="ml-3 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
