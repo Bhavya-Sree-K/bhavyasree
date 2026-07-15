@@ -14,7 +14,7 @@ A modern, animated personal portfolio website built with React and TypeScript, s
 
 ## 🌐 Live Demo
 
-🔗 **[View Live Portfolio →](https://bhavyasreek.netlify.app/)**
+🔗 **[View Live Portfolio →](https://bhavyasree.lovable.app/)**
 
 ---
 
